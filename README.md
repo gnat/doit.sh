@@ -51,14 +51,14 @@ Print out a help message with all the available tasks in this build file if no t
 [ "$#" -gt 0 ] || printf "Usage:\n\t./do.sh %s\n" "($(compgen -A function | grep '^[^_]' | paste -sd '|' -))"
 ```
 
-### Helper functions
+### Helper library
 ```bash
 source $(dirname $0)/helpers.sh # Include file.
 ```
 
 ### Timestamps
 ```bash
-timestampHHMMSS() { echo "$(( ${1} / 3600 ))h $(( (${1} / 60) % 60 ))m $(( ${1} % 60 ))s"; }
+tsHHMMSS() { echo "$(( ${1} / 3600 ))h $(( (${1} / 60) % 60 ))m $(( ${1} % 60 ))s"; }
 ```
 
 ## Helpful
