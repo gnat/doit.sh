@@ -38,6 +38,7 @@ all() {
 
 [ "$#" -gt 0 ] || build # Default
 ```
+Save as `do.sh` use `chmod +x ./do.sh`
 
 Do it: `./do.sh`
 Or, do a task: `./do.sh build`
