@@ -37,6 +37,8 @@ all() {
 [ "$#" -gt 0 ] || build # Default
 ```
 
+Run: `./do.sh build`
+
 ## Nice snippets
 
 ### Generate help
