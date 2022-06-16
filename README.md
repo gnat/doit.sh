@@ -39,9 +39,13 @@ all() {
 [ "$#" -gt 0 ] || build # Default
 ```
 
-Run: `./do.sh`
+Do it: `./do.sh`
+Or, do a task: `./do.sh build`
 
-Run specific task: `./do.sh build`
+## Alias setup
+* `echo "alias doit='./do.sh'" >> ~/.bashrc`
+* Open new shell.
+* You can now use `doit`
 
 ## Nice snippets
 
