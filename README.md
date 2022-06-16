@@ -1,10 +1,12 @@
-# Do it with vanilla bash.
+# Builds without bullshit.
 ![party-palpatine](https://user-images.githubusercontent.com/24665/174114761-42dfba9c-dcae-473b-8d83-aee59629f7aa.gif)
 
 ## Anti-features
 * No installation
 * No dependencies
 * No overhead
+
+Replace your build system with vanilla bash.
 
 ## Show me
 
@@ -17,16 +19,16 @@ build() {
   command docker -v || (echo "Error: Docker is not installed"; exit 0) # Check for command.
 }
 
-test() {
-  echo "I am ${FUNCNAME[0]}ing in just one line."
-}
-
 deploy() {
   # >/do.sh deploy a b c
   echo "I am ${FUNCNAME[0]}ing with args '$1 $2 $3'" # I am deploying with Arg 1=a Arg 2=b and Arg 3=c
 }
 
-_hidden() { echo "I am a hidden task because I start with _. You can still call me directly"; }
+test() { echo "I am ${FUNCNAME[0]}ing in just one line."; }
+
+_hidden() {
+  echo "I am a hidden task because I start with _. You can still call me directly"
+}
 
 all() {
   build && test && deploy
@@ -37,7 +39,9 @@ all() {
 [ "$#" -gt 0 ] || build # Default
 ```
 
-Run: `./do.sh build`
+Run: `./do.sh`
+
+Run specific task: `./do.sh build`
 
 ## Nice snippets
 
