@@ -34,19 +34,18 @@ all() {
 
 "$@" # <- Do it.
 
-# Use build as default: [ "$#" -gt 0 ] || build
-# Or, generate help as default.
-[ "$#" -gt 0 ] || printf "Usage:\n\t./do.sh %s\n" "($(compgen -A function | grep '^[^_]' | paste -sd '|' -))"
+[ "$#" -gt 0 ] || build # Default
 ```
-
-## Helpful
-
-* [Bash Cheat Sheet](https://bertvv.github.io/cheat-sheets/Bash.html)
-* [Why "pipefail"?](https://mobile.twitter.com/b0rk/status/1314345978963648524)
 
 ## Nice snippets
 
-### Helper functions.
+### Generate help
+Print out a help message with all the available tasks in this build file if no tasks were selected.
+```bash
+[ "$#" -gt 0 ] || printf "Usage:\n\t./do.sh %s\n" "($(compgen -A function | grep '^[^_]' | paste -sd '|' -))"
+```
+
+### Helper functions
 ```bash
 source $(dirname $0)/helpers.sh # Include file.
 ```
@@ -56,5 +55,11 @@ source $(dirname $0)/helpers.sh # Include file.
 timestampHHMMSS() { echo "$(( ${1} / 3600 ))h $(( (${1} / 60) % 60 ))m $(( ${1} % 60 ))s"; }
 ```
 
-## Special Thanks
+## Helpful
+
+* [Bash Cheat Sheet](https://bertvv.github.io/cheat-sheets/Bash.html)
+* [Why "pipefail"?](https://mobile.twitter.com/b0rk/status/1314345978963648524)
+
+
+## Original concept and special thanks
 * Forked from [do](https://github.com/8gears/do) and [run](https://github.com/icetbr/run)
