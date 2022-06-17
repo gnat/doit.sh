@@ -20,7 +20,7 @@ build() {
 }
 
 deploy() {
-  # >/do.sh deploy a b c
+  # >doit deploy a b c
   echo "I am ${FUNCNAME[0]}ing with args '$1 $2 $3'" # I am deploying with Arg 1=a Arg 2=b and Arg 3=c
 }
 
@@ -38,13 +38,13 @@ all() {
 
 [ "$#" -gt 0 ] || build # Default
 ```
-Save as `do.sh` use `chmod +x ./do.sh`
+Save as `doit.sh` use `chmod +x ./doit.sh`
 
-Do it: `./do.sh`
-Or, do a task: `./do.sh build`
+Do it: `./doit.sh`
+Or, do a task: `./doit.sh build`
 
 ## Alias setup
-* `echo "alias doit='./do.sh'" >> ~/.bashrc`
+* `echo "alias doit='./doit.sh'" >> ~/.bashrc`
 * Open new shell.
 * You can now use `doit`
 
@@ -53,7 +53,7 @@ Or, do a task: `./do.sh build`
 ### Generate help
 Print out a help message with all the available tasks in this build file if no tasks were selected.
 ```bash
-[ "$#" -gt 0 ] || printf "Usage:\n\t./do.sh %s\n" "($(compgen -A function | grep '^[^_]' | paste -sd '|' -))"
+[ "$#" -gt 0 ] || printf "Usage:\n\t./doit.sh %s\n" "($(compgen -A function | grep '^[^_]' | paste -sd '|' -))"
 ```
 
 ### Helper library
