@@ -16,7 +16,7 @@ set -euo pipefail # Error handling: -e stops the script on errors # -u stops the
 
 build() {
   echo "I am ${FUNCNAME[0]}ing"
-  command docker -v || (echo "Error: Docker is not installed"; exit 0) # Check for command.
+  command docker -v || (echo "Error: Docker is not installed"; exit 1) # Check for command.
 }
 
 deploy() {
