@@ -19,8 +19,8 @@ build() {
 }
 
 deploy() {
-  # >doit deploy a b c
-  echo "I am ${FUNCNAME[0]}ing with args '$1 $2 $3'" # I am deploying with Arg 1=a Arg 2=b and Arg 3=c
+  # doit deploy a b c
+  echo "I am ${FUNCNAME[0]}ing with args '$1 $2 $3'" # I am deploying with $1=a $2=b and $3=c
 }
 
 clean() { echo "I am ${FUNCNAME[0]}ing in just one line."; }
