@@ -1,4 +1,4 @@
-# Builds without bullshit.
+# Build without bullshit.
 ![party-palpatine](https://user-images.githubusercontent.com/24665/174114761-42dfba9c-dcae-473b-8d83-aee59629f7aa.gif)
 
 ## Anti-features
