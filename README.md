@@ -1,22 +1,21 @@
 # Build without bullshit.
 ![party-palpatine](https://user-images.githubusercontent.com/24665/174114761-42dfba9c-dcae-473b-8d83-aee59629f7aa.gif)
 
-## Anti-features
+## 🏴‍☠️ Anti-features
 * No installation
 * No dependencies
 * No overhead
 
-Replace your build system with vanilla bash.
+Replace your convoluted build system with vanilla bash.
 
 ## Show me
 
 ```bash
 #!/bin/bash
-set -euo pipefail # Error handling: -e stops the script on errors # -u stops the script unset variables # -o pipefail stops pipelines on command fail: https://mobile.twitter.com/b0rk/status/1314345978963648524
+set -euo pipefail # Error handling: -e stops on errors. -u stops on unset variables. -o pipefail stops pipelines on fail: https://mobile.twitter.com/b0rk/status/1314345978963648524
 
 build() {
   echo "I am ${FUNCNAME[0]}ing"
-  command docker -v || (echo "Error: Docker is not installed"; exit 1) # Check for command.
 }
 
 deploy() {
@@ -24,14 +23,15 @@ deploy() {
   echo "I am ${FUNCNAME[0]}ing with args '$1 $2 $3'" # I am deploying with Arg 1=a Arg 2=b and Arg 3=c
 }
 
-test() { echo "I am ${FUNCNAME[0]}ing in just one line."; }
+clean() { echo "I am ${FUNCNAME[0]}ing in just one line."; }
 
-_hidden() {
+_preflight() {
   echo "I am a hidden task because I start with _. You can still call me directly"
+  command docker -v || (echo "Error: Docker is not installed"; exit 1) # Check for command.
 }
 
 all() {
-  build && test && deploy
+  clean && build && deploy
 }
 
 "$@" # <- Do it.
