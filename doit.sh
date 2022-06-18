@@ -18,7 +18,7 @@ _preflight() {
 }
 
 all() {
-  clean && build && deploy
+  _preflight && clean && build && deploy
 }
 
 "$@" # <- Do it.
