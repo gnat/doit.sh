@@ -27,7 +27,7 @@ clean() { echo "I am ${FUNCNAME[0]}ing in just one line."; }
 
 _preflight() {
   echo "I am a hidden task because I start with _. You can still call me directly"
-  command docker -v || (echo "Error: Docker is not installed"; exit 1) # Check for command.
+  which docker || (echo "Error: Docker is not installed"; exit 1) # Check for docker.
 }
 
 all() {
