@@ -69,6 +69,7 @@ tsHHMMSS() { echo "$(( ${1} / 3600 ))h $(( (${1} / 60) % 60 ))m $(( ${1} % 60 ))
 ## Helpful
 
 * [Bash Cheat Sheet](https://bertvv.github.io/cheat-sheets/Bash.html)
+* [Bash Variable Parameter Expansions](https://www.cyberciti.biz/tips/bash-shell-parameter-substitution-2.html)
 * [Why "pipefail"?](https://mobile.twitter.com/b0rk/status/1314345978963648524)
 
 
