@@ -50,10 +50,9 @@ Or, do a task: `./doit.sh build`
 
 ## Nice snippets
 
-### Generate help
-Print out a help message with all the available tasks in this build file if no tasks were selected.
+### Generate help message
 ```bash
-[ "$#" -gt 0 ] || printf "Usage:\n\t./doit.sh %s\n" "($(compgen -A function | grep '^[^_]' | paste -sd '|' -))"
+[ "$#" -gt 0 ] || printf "Usage:\n\t$0 ($(compgen -A function | grep '^[^_]' | paste -sd '|' -))\n"
 ```
 
 ### Helper library
