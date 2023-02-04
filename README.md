@@ -15,28 +15,32 @@ Replace your convoluted build system with vanilla bash.
 set -euo pipefail # Error handling: -e stops on errors. -u stops on unset variables. -o pipefail stops pipelines on fail: https://mobile.twitter.com/b0rk/status/1314345978963648524
 
 build() {
-  echo "I am ${FUNCNAME[0]}ing"
+  echo "I am ${FUNCNAME[0]}ing" # doit build ... I am building
 }
 
 deploy() {
-  # doit deploy a b c
-  echo "I am ${FUNCNAME[0]}ing with args '$1 $2 $3'" # I am deploying with $1=a $2=b and $3=c
+  echo "I am ${FUNCNAME[0]}ing with args $1 $2 $3" # doit deploy a b c ... I am deploying with args a b c
 }
 
 clean() { echo "I am ${FUNCNAME[0]}ing in just one line."; }
 
-_preflight() {
-  echo "I am a hidden task because I start with _. You can still call me directly"
-  which docker || (echo "Error: Docker is not installed"; exit 1) # Check for docker.
+required() {
+  which docker || { echo "Error: Docker is not installed"; exit 1; }
 }
 
 all() {
-  _preflight && clean && build && deploy
+  required && clean && build # Continues chain on success.
 }
 
-"$@" # <- Do it.
+# Run any script from your own URL.
+remote() {
+  echo "Not found: '$1' Trying remote..."
+  { curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/ops/$1 ${@:2} | bash; } || echo "Not found: '$1'"
+  # Add your own public or private repositories!
+}
 
-[ "$#" -gt 0 ] || build # Default
+"$@" || remote $@ # DO IT.
+[ "$#" -gt 0 ] || echo "Usage: $0 task [args]" # Or, default.
 ```
 Save as `doit.sh` use `chmod +x ./doit.sh`
 
@@ -54,6 +58,7 @@ Or, do a task: `./doit.sh build`
 ```bash
 [ "$#" -gt 0 ] || printf "Usage:\n\t$0 ($(compgen -A function | grep '^[^_]' | paste -sd '|' -))\n"
 ```
+* Hide task from help message by starting with "_". You can still call them directly.
 
 ### Helper library
 ```bash
