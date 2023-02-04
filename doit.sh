@@ -19,10 +19,10 @@ all() {
   required && clean && build # Continues chain on success.
 }
 
-# Run any script from your own URL.
+# Optionally, run any script from your own URL.
 remote() {
   echo "Not found: '$1' Trying remote..."
-  { curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/ops/$1 ${@:2} | bash; } || echo "Not found: '$1'"
+  { curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/ops/$1.sh ${@:2} | bash; } || echo "Not found: '$1'"
   # Add your own public or private repositories!
 }
 
