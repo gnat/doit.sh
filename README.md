@@ -79,6 +79,7 @@ tsHHMMSS() { echo "$(( ${1} / 3600 ))h $(( (${1} / 60) % 60 ))m $(( ${1} % 60 ))
 
 ## Original concept and special thanks
 * Forked from [do](https://github.com/8gears/do) and [run](https://github.com/icetbr/run)
+* Inspired by [shell](https://github.com/netkiller/shell)
 
 ## Related Tools
 
