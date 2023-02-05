@@ -19,11 +19,11 @@ echo "[$0] 🟢 Trying to shutdown related services."
 echo "[$0] 🟢 Trying to remove old versions of Rootless Docker."
 cd ~/bin && rm -f *docker* *containerd* *runc* *rootlesskit* *vpnkit*
 
-#read -p "[$0] ❓ Do you want to purge all containers, images, volumes? (y/n)" CHOICE
-#if [[ $CHOICE == 'y' ]]; then
-#	echo "[$0] 🟢 Purging all containers, images, volumes."
-#	$(rootlesskit rm -rf ~/.local/share/docker) || true
-#fi
+read -p "[$0] ❓ Do you want to purge all containers, images, volumes? (y/n)" CHOICE
+if [[ $CHOICE == 'y' ]]; then
+	echo "[$0] 🟢 Purging all containers, images, volumes."
+	$(rootlesskit rm -rf ~/.local/share/docker) || true
+fi
 
 mkdir -p /home/$USER/.config/systemd/user/docker.service.d
 bash -c "cat <<-EOF > /home/$USER/.config/systemd/user/docker.service.d/override.conf
