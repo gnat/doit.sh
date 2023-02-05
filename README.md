@@ -36,11 +36,12 @@ all() {
 # Optionally, run any script from your own URL.
 extend() {
   echo "Not found: '$1' Trying remote..."
-  { curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/extend/$1.sh | bash --login -s -- ${@:2}; } || echo "Not found: '$1'"
   # Add your own public or private repositories!
+  # { curl -fsSL https://YOUR_PRIVATE_GITHUB/main/$1.sh -H "Authorization: Token YOUR_PRIVATE_ACCESS_CODE" | bash --login -s -- ${@:2}; } || 
+  { curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/extend/$1.sh | bash --login -s -- ${@:2}; } && exit 1 || echo "Not found: '$1'"
 }
 
-[ "$#" -gt 0 ] && { "$@" || extend "$@"; } || echo "Usage: $0 name [args]" # DO IT!
+[ "$#" -gt 0 ] || echo "Usage: doit task [optional args]" && { "$@" || extend "$@"; } # DO IT!
 ```
 Save as `doit.sh` use `chmod +x ./doit.sh`
 
