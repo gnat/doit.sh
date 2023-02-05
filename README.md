@@ -36,7 +36,7 @@ all() {
 # Optionally, run any script from your own URL.
 extend() {
   echo "Not found: '$1' Trying remote..."
-  { curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/extend/$1.sh | bash -s -- ${@:2}; } || echo "Not found: '$1'"
+  { curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/extend/$1.sh | bash --login -s -- ${@:2}; } || echo "Not found: '$1'"
   # Add your own public or private repositories!
 }
 
