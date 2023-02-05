@@ -16,15 +16,14 @@ required() {
 }
 
 all() {
-  required && clean && build # Continues chain on success.
+  required && clean && build && deploy a b c # Continues chain on success.
 }
 
 # Optionally, run any script from your own URL.
-remote() {
+extend() {
   echo "Not found: '$1' Trying remote..."
-  { curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/ops/$1.sh ${@:2} | bash; } || echo "Not found: '$1'"
+  { curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/extend/$1.sh | bash -s -- ${@:2}; } || echo "Not found: '$1'"
   # Add your own public or private repositories!
 }
 
-"$@" || remote $@ # DO IT.
-[ "$#" -gt 0 ] || echo "Usage: $0 task [args]" # Or, default.
+[ "$#" -gt 0 ] && { "$@" || extend "$@"; } || echo "Usage: $0 name [args]" # DO IT!
