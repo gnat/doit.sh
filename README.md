@@ -56,18 +56,22 @@ Or, do a task: `./doit.sh build`
 
 ### Generate help message
 ```bash
+# Hide functions by starting name with "_". You can still call them directly.
 [ "$#" -gt 0 ] || printf "Usage:\n\t$0 ($(compgen -A function | grep '^[^_]' | paste -sd '|' -))\n"
 ```
-* Hide task from help message by starting with "_". You can still call them directly.
 
 ### Helper library
 ```bash
-. $(dirname $0)/helpers.sh # Include file.
+# Include file.
+. $(dirname $0)/helpers.sh
 ```
 
 ### Timestamps
 ```bash
-tsHHMMSS() { echo "$(( ${1} / 3600 ))h $(( (${1} / 60) % 60 ))m $(( ${1} % 60 ))s"; }
+# Generate human readable, sortable file timestamp to the second.
+timestamp() { echo "$(date -u +"%Y_%m_%d__%H_%M_%S")"; }
+# EXAMPLE=$(timestamp); echo $EXAMPLE;
+# 2021_05_04__10_31_12
 ```
 
 ## Helpful
