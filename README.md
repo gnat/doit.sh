@@ -5,6 +5,7 @@
 * No installation
 * No dependencies
 * No overhead
+* Extend locally, or from anywhere using `curl`
 
 Replace your convoluted build system with vanilla bash.
 
@@ -29,18 +30,17 @@ required() {
 }
 
 all() {
-  required && clean && build # Continues chain on success.
+  required && clean && build && deploy a b c # Continues chain on success.
 }
 
-# Optionally, run any script from your own URL.
-remote() {
+# Optionally, run any script from your own URL 🌐
+extend() {
   echo "Not found: '$1' Trying remote..."
-  { curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/ops/$1.sh ${@:2} | bash; } || echo "Not found: '$1'"
+  { curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/extend/$1.sh ${@:2} | bash; } || echo "Not found: '$1'"
   # Add your own public or private repositories!
 }
 
-"$@" || remote $@ # DO IT.
-[ "$#" -gt 0 ] || echo "Usage: $0 task [args]" # Or, default.
+[ "$#" -gt 0 ] && { "$@" || extend "$@"; } || echo "Usage: $0 name [args]" # DO IT!
 ```
 Save as `doit.sh` use `chmod +x ./doit.sh`
 
@@ -62,7 +62,7 @@ Or, do a task: `./doit.sh build`
 
 ### Helper library
 ```bash
-source $(dirname $0)/helpers.sh # Include file.
+. $(dirname $0)/helpers.sh # Include file.
 ```
 
 ### Timestamps
