@@ -63,8 +63,10 @@ Or, do a task: `./doit.sh build`
 
 ### Helper library
 ```bash
-# Include file.
+# Include local script.
 . $(dirname $0)/helpers.sh
+# Include online script.
+. <(curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/extend/helpers.sh)
 ```
 
 ### Timestamps
