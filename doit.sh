@@ -20,10 +20,9 @@ all() {
   required && clean && build && deploy a b c # Continues chain on success.
 }
 
-# Run any online script from your own URL.
 online() {
   echo "Not found. Trying online..."
-  # Add your own public or private repositories! 
+  # Run any script from your own online URL, including public or private github repositories! 
   { curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/online/$1.sh | bash --login -s -- ${@:2}; } && exit 1 || echo "Not found: '$1'"
 }
 
