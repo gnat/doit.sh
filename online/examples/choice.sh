@@ -4,7 +4,7 @@ set -euo pipefail
 read -p "❓ Do you want to choose yes or no? (y/n)" CHOICE
 if [[ "$CHOICE" == "y" ]]; then
   echo "YES" 
-else [[ "$CHOICE" == "n" ]]; then
+elif [[ "$CHOICE" == "n" ]]; then
   echo "NO" 
 fi
 
