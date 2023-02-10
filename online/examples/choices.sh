@@ -3,7 +3,7 @@ set -euo pipefail
 
 # PLEASE NOTE: cURL to bash pipes (curl "..." | bash) will break user input prompts such as read!
 #
-# You'll must load this type of script using one of the alternatives:
+# To fix, load this type of script using one of the alternatives:
 #
 # A) Include.
 # . <(curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/online/$1.sh)
