@@ -99,7 +99,7 @@ $0 example
 
 ## FAQ
 
-### For online scripts, why are `read` user input prompts broken ?
+### For online scripts, why are `read` prompts broken ?
 * `curl https://URL/script.sh | bash` breaks some user input prompts such as `read`. For workarounds, see [examples/choices](https://github.com/gnat/doit/blob/main/online/examples/choices.sh). Alternatively, you can consider switching online scripts to using arguments.
 
 ### For online scripts, why `bash --login` ?
