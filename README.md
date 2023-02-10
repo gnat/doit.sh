@@ -85,6 +85,11 @@ $0 example
 [ "$#" -gt 0 ] || printf "Usage:\n\t$0 ($(compgen -A function | grep '^[^_]' | paste -sd '|' -))\n"
 ```
 
+### Offline only doit.sh
+```bash
+[ "$#" -gt 0 ] || echo "Usage: doit task [optional args]" && "$@" # 🟢 DO IT!
+```
+
 ## Helpful references
 
 * [Bash Cheat Sheet](https://bertvv.github.io/cheat-sheets/Bash.html)
