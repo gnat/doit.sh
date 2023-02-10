@@ -22,6 +22,3 @@ elif [[ "$CHOICE" == "n" ]]; then
 fi
 
 echo "Entered: $CHOICE"
-echo "✅"
-
-
