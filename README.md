@@ -76,7 +76,7 @@ online() {
 # Just run online script.
 curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/online/helpers.sh | bash
 
-# Just run online script using online() fallback.
+# Just run online script, using online() fallback.
 $0 example
 ```
 
