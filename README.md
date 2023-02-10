@@ -99,10 +99,10 @@ $0 example
 
 ## FAQ
 
-### Why are some user input prompts, such as `read`, broken ?
-* The pipe trick (`curl https://URL/script.sh | bash`) breaks some user input prompts such as `read`. If your scripts do not use `read`, you can use the pipe. See [examples/choices](https://github.com/gnat/doit/blob/main/online/examples/choices.sh) for workarounds.
+### For online scripts, why are `read` user input prompts broken ?
+* `curl https://URL/script.sh | bash` breaks some user input prompts such as `read`. For workarounds, see [examples/choices](https://github.com/gnat/doit/blob/main/online/examples/choices.sh). Alternatively, you can consider switching online scripts to using arguments.
 
-### Why `bash --login` ?
+### For online scripts, why `bash --login` ?
 * This simulates a user session, and is required to install certain apps such as Rootless Docker.
 
 ## Special thanks
