@@ -13,18 +13,19 @@ clean() { echo "I am ${FUNCNAME[0]}ing in just one line."; }
 
 required() {
   which docker || { echo "Error: Docker is not installed"; exit 1; }
+  # $0 docker/install_check # Optionally run an online script. See below.
 }
 
 all() {
   required && clean && build && deploy a b c # Continues chain on success.
 }
 
-# Optionally, run any script from your own URL.
-extend() {
-  echo "Not found: '$1' Trying remote..."
+# Run any online script from your own URL.
+online() {
+  echo "Not found: '$1' Trying online..."
   # Add your own public or private repositories!
   # { curl -fsSL https://YOUR_PRIVATE_GITHUB/main/$1.sh -H "Authorization: Token YOUR_PRIVATE_ACCESS_CODE" | bash --login -s -- ${@:2}; } || 
-  { curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/extend/$1.sh | bash --login -s -- ${@:2}; } && exit 1 || echo "Not found: '$1'"
+  { curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/online/$1.sh | bash --login -s -- ${@:2}; } && exit 1 || echo "Not found: '$1'"
 }
 
-[ "$#" -gt 0 ] || echo "Usage: doit task [optional args]" && { "$@" || extend "$@"; } # DO IT!
+[ "$#" -gt 0 ] || echo "Usage: doit task [optional args]" && { "$@" || extend "$@"; } # 🟢 DO IT!
