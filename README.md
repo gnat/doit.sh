@@ -36,7 +36,7 @@ all() {
 
 # Run any online script from your own URL.
 online() {
-  echo "Not found: '$1' Trying online..."
+  echo "Not found. Trying online..."
   # Add your own public or private repositories!
   # { curl -fsSL https://YOUR_PRIVATE_GITHUB/main/$1.sh -H "Authorization: Token YOUR_PRIVATE_ACCESS_CODE" | bash --login -s -- ${@:2}; } || 
   { curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/online/$1.sh | bash --login -s -- ${@:2}; } && exit 1 || echo "Not found: '$1'"
