@@ -43,8 +43,8 @@ mkdir -p /home/$USER/.local/bin
 
 echo "[$0] 🟢 Adding to bashrc."
 if [[ $(cat /home/$USER/.bashrc | grep 'XDG_RUNTIME_DIR') = *XDG_RUNTIME_DIR* ]]; then
-	sed -i '1iexport DOCKER_HOST=unix:///run/user/1000/docker.sock' ~/.bashrc
-	sed -i '1iexport XDG_RUNTIME_DIR=/run/user/1000' ~/.bashrc
+	sed -i "1iexport DOCKER_HOST=unix:///run/user/$(id -u)/docker.sock" ~/.bashrc
+	sed -i "1iexport XDG_RUNTIME_DIR=/run/user/$(id -u)" ~/.bashrc
 fi
 
 echo "[$0] 🟢 Installing rootless docker-compose."
