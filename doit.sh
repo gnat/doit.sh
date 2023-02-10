@@ -13,7 +13,7 @@ clean() { echo "I am ${FUNCNAME[0]}ing in just one line."; }
 
 required() {
   which docker || { echo "Error: Docker is not installed"; exit 1; }
-  # $0 docker/install_check # Optionally run an online script. See below.
+  # $0 docker/install_check # Easily run an online script. See below.
 }
 
 all() {
@@ -22,9 +22,8 @@ all() {
 
 # Run any online script from your own URL.
 online() {
-  echo "Not found: '$1' Trying online..."
-  # Add your own public or private repositories!
-  # { curl -fsSL https://YOUR_PRIVATE_GITHUB/main/$1.sh -H "Authorization: Token YOUR_PRIVATE_ACCESS_CODE" | bash --login -s -- ${@:2}; } || 
+  echo "Not found. Trying online..."
+  # Add your own public or private repositories! 
   { curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/online/$1.sh | bash --login -s -- ${@:2}; } && exit 1 || echo "Not found: '$1'"
 }
 
