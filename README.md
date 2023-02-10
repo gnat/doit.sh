@@ -35,9 +35,11 @@ all() {
 }
 
 online() {
-  echo "Not found. Trying online..."
   # Run any script from your own online URL, including public or private github repositories! 
-  { curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/online/$1.sh | bash --login -s -- ${@:2}; } && exit 1 || echo "Not found: '$1'"
+  URL="https://raw.githubusercontent.com/gnat/doit/main/online/$1.sh"
+  echo "🌐 Find online? (y/n) ($URL) "; read CHOICE && [[ $CHOICE = [yY] ]] || (echo "Cancelled"; exit 1)
+  { curl -fsSL "$URL" | bash --login -s -- ${@:2}; } || 
+  echo "Not found: '$1'"
 }
 
 [ "$#" -gt 0 ] || echo "Usage: doit task [optional args]" && { "$@" || online "$@"; } # 🟢 DO IT!
@@ -53,16 +55,6 @@ Or, do a task: `./doit.sh build`
 * You can now use `doit`
 
 ## Snippets
-
-### Private github repository, with fallback
-
-```bash
-online() {
-  echo "Not found. Trying online..."
-  { curl -fsSL https://YOUR_PRIVATE_GITHUB/main/$1.sh -H "Authorization: Token YOUR_PRIVATE_ACCESS_CODE" | bash --login -s -- ${@:2}; } || 
-  { curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/online/$1.sh | bash --login -s -- ${@:2}; } && exit 1 || echo "Not found: '$1'"
-}
-```
 
 ### Offline only doit.sh
 ```bash
@@ -82,6 +74,32 @@ curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/online/helpers.sh | 
 
 # Just run online script, using online() fallback.
 $0 example
+```
+
+### Private github
+```bash
+online() {
+  URL="https://YOUR_PRIVATE_GITHUB/main/$1.sh"
+  echo "🌐 Find online? (y/n) ($URL) "; read CHOICE && [[ $CHOICE = [yY] ]] || (echo "Cancelled"; exit 1)
+  { curl -fsSL "$URL -H 'Authorization: Token YOUR_PRIVATE_ACCESS_CODE'" | bash --login -s -- ${@:2}; } ||
+  echo "Not found: '$1'"
+}
+```
+
+### Private github, with fallbacks
+```bash
+online() {
+  URLS=(
+    "https://YOUR_PRIVATE_GITHUB/main/$1.sh -H 'Authorization: Token YOUR_PRIVATE_ACCESS_CODE'"
+    "https://raw.githubusercontent.com/gnat/doit/main/online/$1.sh"
+    "https://raw.githubusercontent.com/gnat/doit_again/main/online/$1.sh"
+  )
+  for URL in "${URLS[@]}"; do
+    echo "🌐 Find online? (y/n) (${URL%% *}) "; read CHOICE && [[ $CHOICE = [yY] ]] || { echo "Skipping"; continue; }
+    { curl -fsSL "$URL" | bash --login -s -- ${@:2}; } && exit # Success
+  done
+  echo "Not found: '$1'"
+}
 ```
 
 ### Generate help message
