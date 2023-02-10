@@ -97,6 +97,13 @@ $0 example
 * [Why "pipefail"?](https://mobile.twitter.com/b0rk/status/1314345978963648524)
 * [CURL guide](https://github.com/frizb/HackingWithCurl)
 
+## FAQ
+
+### Why are some user input prompts, such as `read`, broken ?
+* The pipe trick (`curl https://URL/script.sh | bash`) breaks some user input prompts such as `read`. If your scripts do not use `read`, you can use the pipe. See [examples/choices](https://github.com/gnat/doit/blob/main/online/examples/choices.sh) for workarounds.
+
+### Why `bash --login` ?
+* This simulates a user session, and is required to install certain apps such as Rootless Docker.
 
 ## Special thanks
 * Forked from [do](https://github.com/8gears/do) and [run](https://github.com/icetbr/run)
