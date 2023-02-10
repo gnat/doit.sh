@@ -69,10 +69,13 @@ online() {
 ```bash
 # Include and run local script.
 . $(dirname $0)/helpers.sh
+
 # Include and run online script.
 . <(curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/online/helpers.sh)
+
 # Run online script.
 curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/online/helpers.sh | bash
+
 # Run online script using online() fallback.
 $0 example
 ```
