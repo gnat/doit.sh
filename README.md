@@ -67,10 +67,10 @@ online() {
 
 ### Run external scripts from doit.sh
 ```bash
-# Include and run local script.
+# Include local script.
 . $(dirname $0)/helpers.sh
 
-# Include and run online script.
+# Include online script.
 . <(curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/online/helpers.sh)
 
 # Run online script.
