@@ -83,14 +83,6 @@ $0 example
 [ "$#" -gt 0 ] || printf "Usage:\n\t$0 ($(compgen -A function | grep '^[^_]' | paste -sd '|' -))\n"
 ```
 
-### Timestamps
-```bash
-# Generate human readable, sortable file timestamp to the second.
-timestamp() { echo "$(date -u +"%Y_%m_%d__%H_%M_%S")"; }
-# EXAMPLE=$(timestamp); echo $EXAMPLE;
-# 2021_05_04__10_31_12
-```
-
 ## Helpful references
 
 * [Bash Cheat Sheet](https://bertvv.github.io/cheat-sheets/Bash.html)
