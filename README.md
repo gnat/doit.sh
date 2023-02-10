@@ -64,6 +64,11 @@ online() {
 }
 ```
 
+### Offline only doit.sh
+```bash
+[ "$#" -gt 0 ] || echo "Usage: doit task [optional args]" && "$@" # 🟢 DO IT!
+```
+
 ### Run external scripts from doit.sh
 ```bash
 # Include local script.
@@ -83,11 +88,6 @@ $0 example
 ```bash
 # Hide functions by starting name with "_". You can still call them directly.
 [ "$#" -gt 0 ] || printf "Usage:\n\t$0 ($(compgen -A function | grep '^[^_]' | paste -sd '|' -))\n"
-```
-
-### Offline only doit.sh
-```bash
-[ "$#" -gt 0 ] || echo "Usage: doit task [optional args]" && "$@" # 🟢 DO IT!
 ```
 
 ## Helpful references
