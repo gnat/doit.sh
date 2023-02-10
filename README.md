@@ -5,7 +5,7 @@
 * No installation
 * No dependencies
 * No overhead
-* Extend locally, or from anywhere using `curl`
+* Script locally, or from anywhere using `curl`
 
 Replace your convoluted build system with vanilla bash.
 
@@ -42,7 +42,7 @@ online() {
   { curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/online/$1.sh | bash --login -s -- ${@:2}; } && exit 1 || echo "Not found: '$1'"
 }
 
-[ "$#" -gt 0 ] || echo "Usage: doit task [optional args]" && { "$@" || extend "$@"; } # 🟢 DO IT!
+[ "$#" -gt 0 ] || echo "Usage: doit task [optional args]" && { "$@" || online "$@"; } # 🟢 DO IT!
 ```
 Save as `doit.sh` use `chmod +x ./doit.sh`
 
@@ -67,7 +67,7 @@ Or, do a task: `./doit.sh build`
 # Include local script.
 . $(dirname $0)/helpers.sh
 # Include online script.
-. <(curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/extend/helpers.sh)
+. <(curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/online/helpers.sh)
 ```
 
 ### Timestamps
