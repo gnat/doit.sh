@@ -1,6 +1,6 @@
 # Run directly
 ```bash
-curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/extend/example.sh | bash --login
+curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/online/example.sh | bash --login
 ```
 # Patterns
 * Use `curl` inside scripts to call child scripts and download assets from public or private repos.
