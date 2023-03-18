@@ -35,7 +35,7 @@ all() {
 }
 
 online() {
-  # Run any script from your own online URL, including public or private github repositories! 
+  # Optional: Run any script from your own online URL, including public or private github repositories! 
   URL="https://raw.githubusercontent.com/gnat/doit/main/online/$1.sh"
   echo "🌐 Find online? (y/n) ($URL) "; read CHOICE && [[ $CHOICE = [yY] ]] || (echo "Cancelled"; exit 1)
   { curl -fsSL "$URL" | bash --login -s -- ${@:2}; } || 
@@ -61,22 +61,33 @@ Or, do a task: `./doit.sh build`
 [ "$#" -gt 0 ] || echo "Usage: doit task [optional args]" && "$@" # 🟢 DO IT!
 ```
 
-### Run external scripts from doit.sh
+### Include local script
 ```bash
 # Include local script.
 . $(dirname $0)/helpers.sh
+```
 
-# Include online script.
-. <(curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/online/helpers.sh)
+### Generate help message
+```bash
+# Hide functions by starting name with "_". You can still call them directly.
+[ "$#" -gt 0 ] || printf "Usage:\n\t$0 ($(compgen -A function | grep '^[^_]' | paste -sd '|' -))\n"
+```
 
-# Just run online script.
+## Snippets for online() usage
+
+### Tons of ways to use online scripts.
+```bash
+# Run online script.
 curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/online/helpers.sh | bash
 
-# Just run online script, using online() fallback.
+# Import online script.
+. <(curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/online/helpers.sh)
+
+# Run online script, with online() fallback.
 $0 example
 ```
 
-### Private github
+### Use private github
 ```bash
 online() {
   URL="https://YOUR_PRIVATE_GITHUB/main/$1.sh"
@@ -86,7 +97,7 @@ online() {
 }
 ```
 
-### Private github, with fallbacks
+### Use private github, with fallbacks
 ```bash
 online() {
   URLS=(
@@ -100,12 +111,6 @@ online() {
   done
   echo "Not found: '$1'"
 }
-```
-
-### Generate help message
-```bash
-# Hide functions by starting name with "_". You can still call them directly.
-[ "$#" -gt 0 ] || printf "Usage:\n\t$0 ($(compgen -A function | grep '^[^_]' | paste -sd '|' -))\n"
 ```
 
 ## Helpful references
