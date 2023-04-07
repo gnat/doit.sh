@@ -5,7 +5,7 @@
 * No installation
 * No dependencies
 * No overhead
-* Script locally, or from anywhere using `curl`
+* Script locally, or [online](#online-doitsh) via curl
 
 Replace your convoluted build system with vanilla bash.
 
@@ -34,15 +34,7 @@ all() {
   required && clean && build && deploy a b c # Continues chain on success.
 }
 
-online() {
-  # Optional: Run any script from your own online URL, including public or private github repositories! 
-  URL="https://raw.githubusercontent.com/gnat/doit/main/online/$1.sh"
-  echo "🌐 Find online? (y/n) ($URL) "; read CHOICE && [[ $CHOICE = [yY] ]] || (echo "Cancelled"; exit 1)
-  { curl -fsSL "$URL" | bash --login -s -- ${@:2}; } || 
-  echo "Not found: '$1'"
-}
-
-[ "$#" -gt 0 ] || echo "Usage: doit task [optional args]" && { "$@" || online "$@"; } # 🟢 DO IT!
+[ "$#" -gt 0 ] || echo "Usage: doit task [optional args]" && "$@" # 🟢 DO IT!
 ```
 Save as `doit.sh` use `chmod +x ./doit.sh`
 
@@ -56,9 +48,17 @@ Or, do a task: `./doit.sh build`
 
 ## Snippets
 
-### Offline only doit.sh
+### Online doit.sh
 ```bash
-[ "$#" -gt 0 ] || echo "Usage: doit task [optional args]" && "$@" # 🟢 DO IT!
+online() {
+  # Optional: Run any script from your own online URL, including public or private github repositories! 
+  URL="https://raw.githubusercontent.com/gnat/doit/main/online/$1.sh"
+  echo "🌐 Find online? (y/n) ($URL) "; read CHOICE && [[ $CHOICE = [yY] ]] || (echo "Cancelled"; exit 1)
+  { curl -fsSL "$URL" | bash --login -s -- ${@:2}; } || 
+  echo "Not found: '$1'"
+}
+
+[ "$#" -gt 0 ] || echo "Usage: doit task [optional args]" && { "$@" || online "$@"; } # 🟢 DO IT!
 ```
 
 ### Include local script
