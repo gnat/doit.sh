@@ -9,7 +9,7 @@
 
 Replace your convoluted build system with vanilla bash.
 
-## Show me
+## 👉 Show me
 
 ```bash
 #!/bin/bash
