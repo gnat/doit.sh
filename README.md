@@ -49,9 +49,9 @@ Or, do a task: `./doit.sh build`
 ## Snippets
 
 ### Online doit.sh
+Optionally, run any script from your own online URL, including public or private github repositories! 
 ```bash
 online() {
-  # Optional: Run any script from your own online URL, including public or private github repositories! 
   URL="https://raw.githubusercontent.com/gnat/doit/main/online/$1.sh"
   echo "🌐 Find online? (y/n) ($URL) "; read CHOICE && [[ $CHOICE = [yY] ]] || (echo "Cancelled"; exit 1)
   { curl -fsSL "$URL" | bash --login -s -- ${@:2}; } || 
