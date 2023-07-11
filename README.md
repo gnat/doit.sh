@@ -115,6 +115,8 @@ online() {
 
 ## Helpful references
 
+* [Bash Reference. Official](https://www.gnu.org/software/bash/manual/html_node/index.html)
+* [Bash Source Code](https://github.com/bminor/bash)
 * [Bash Cheat Sheet](https://bertvv.github.io/cheat-sheets/Bash.html)
 * [Bash Variable Parameter Expansions](https://www.cyberciti.biz/tips/bash-shell-parameter-substitution-2.html)
 * [Why "pipefail"?](https://mobile.twitter.com/b0rk/status/1314345978963648524)
