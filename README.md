@@ -119,6 +119,7 @@ online() {
 * [Bash Source Code](https://github.com/bminor/bash)
 * [Bash Cheat Sheet](https://bertvv.github.io/cheat-sheets/Bash.html)
 * [Bash Variable Parameter Expansions](https://www.cyberciti.biz/tips/bash-shell-parameter-substitution-2.html)
+* [Shell Explainer](https://explainshell.com/)
 * [Why "pipefail"?](https://mobile.twitter.com/b0rk/status/1314345978963648524)
 * [CURL guide](https://github.com/frizb/HackingWithCurl)
 
