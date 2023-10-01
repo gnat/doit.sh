@@ -5,7 +5,7 @@
 * No installation
 * No dependencies
 * No overhead
-* Script locally, or [online](#online-doitsh) via curl
+* Script locally, or online via curl
 
 Replace your convoluted build system with vanilla bash.
 
