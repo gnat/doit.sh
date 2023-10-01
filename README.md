@@ -16,17 +16,17 @@ Replace your convoluted build system with vanilla bash.
 set -euo pipefail # Error handling: -e stops on errors. -u stops on unset variables. -o pipefail stops pipelines on fail: https://mobile.twitter.com/b0rk/status/1314345978963648524
 
 build() {
-  echo "I am ${FUNCNAME[0]}ing" # doit build ... I am building
+  echo "I am ${FUNCNAME[0]}ing" # doit build ▶️ I am building
 }
 
 deploy() {
-  echo "I am ${FUNCNAME[0]}ing with args $1 $2 $3" # doit deploy a b c ... I am deploying with args a b c
+  echo "I am ${FUNCNAME[0]}ing with args $1 $2 $3" # doit deploy a b c ▶️ I am deploying with args a b c
 }
 
-clean() { echo "I am ${FUNCNAME[0]}ing in just one line."; }
+clean() { echo "I am ${FUNCNAME[0]}ing in just one line." ;}
 
 required() {
-  which docker || { echo "Error: Docker is not installed"; exit 1; }
+  which docker || { echo "Error: Docker is not installed"; exit 1 ;}
   # $0 docker/install_check # Easily run an online script. See below.
 }
 
@@ -34,12 +34,11 @@ all() {
   required && clean && build && deploy a b c # Continues chain on success.
 }
 
-[ "$#" -gt 0 ] || echo "Usage: doit task [optional args]" && "$@" # 🟢 DO IT!
+[ "$#" -gt 0 ] || echo "Usage: doit task [options]" && "$@" # 🟢 DO IT!
 ```
 Save as `doit.sh` use `chmod +x ./doit.sh`
 
-Do it: `./doit.sh`
-Or, do a task: `./doit.sh build`
+Do a task: `./doit.sh build`
 
 ## Alias setup
 * `echo "alias doit='./doit.sh'" >> ~/.bashrc`
@@ -47,19 +46,6 @@ Or, do a task: `./doit.sh build`
 * You can now use `doit`
 
 ## Snippets
-
-### Online doit.sh
-Optionally, run any script from your own online URL, including public or private github repositories! 
-```bash
-online() {
-  URL="https://raw.githubusercontent.com/gnat/doit/main/online/$1.sh"
-  echo "🌐 Find online? (y/n) ($URL) "; read CHOICE && [[ $CHOICE = [yY] ]] || (echo "Cancelled"; exit 1)
-  { curl -fsSL "$URL" | bash --login -s -- ${@:2}; } || 
-  echo "Not found: '$1'"
-}
-
-[ "$#" -gt 0 ] || echo "Usage: doit task [optional args]" && { "$@" || online "$@"; } # 🟢 DO IT!
-```
 
 ### Include local script
 ```bash
@@ -69,11 +55,23 @@ online() {
 
 ### Generate help message
 ```bash
-# Hide functions by starting name with "_". You can still call them directly.
-[ "$#" -gt 0 ] || printf "Usage:\n\t$0 ($(compgen -A function | grep '^[^_]' | paste -sd '|' -))\n"
+[ "$#" -gt 0 ] && { "$@"; } || echo -e "Usage: $0 task [options]\nFunctions:"; printf "\t%s\n" $(compgen -A function) # 🟢 DO IT!
 ```
 
-## Snippets for online() usage
+### Online scripts
+Run any script from a URL, including public or private github repositories! 
+```bash
+online() {
+  URL="https://raw.githubusercontent.com/gnat/doit/main/online/$1.sh"
+  echo "🌐 Find online? (y/n) ($URL) "; read CHOICE && [[ $CHOICE = [yY] ]] || (echo "Cancelled"; exit 1)
+  { curl -fsSL "$URL" | bash --login -s -- ${@:2}; } || 
+  echo "Not found: '$1'"
+}
+
+[ "$#" -gt 0 ] || echo -e "Usage: $0 task [options]" && { "$@" || online "$@"; } # 🟢 DO IT!
+```
+
+## Online Snippets
 
 ### Tons of ways to use online scripts.
 ```bash
