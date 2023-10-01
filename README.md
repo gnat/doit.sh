@@ -47,15 +47,15 @@ Do a task: `./doit.sh build`
 
 ## Snippets
 
+### Show task list
+```bash
+[ "$#" -gt 0 ] && { "$@"; } || echo -e "Usage: $0 task [options]\nTasks:"; printf "\t%s\n" $(compgen -A function) # 🟢 DO IT!
+```
+
 ### Include local script
 ```bash
 # Include local script.
 . $(dirname $0)/helpers.sh
-```
-
-### Generate help message
-```bash
-[ "$#" -gt 0 ] && { "$@"; } || echo -e "Usage: $0 task [options]\nFunctions:"; printf "\t%s\n" $(compgen -A function) # 🟢 DO IT!
 ```
 
 ### Online scripts
