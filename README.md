@@ -71,16 +71,12 @@ online() {
 
 ## Online Snippets
 
-### Tons of ways to use online scripts.
 ```bash
 # Run online script.
 curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/online/helpers.sh | bash
 
 # Import online script.
 . <(curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/online/helpers.sh)
-
-# Run online script, with online() fallback.
-$0 example
 ```
 
 ### Use private github
