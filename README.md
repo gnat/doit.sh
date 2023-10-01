@@ -62,10 +62,8 @@ Do a task: `./doit.sh build`
 Run any script from a URL, including public or private github repositories! 
 ```bash
 online() {
-  URL="https://raw.githubusercontent.com/gnat/doit/main/online/$1.sh"
-  echo "🌐 Find online? (y/n) ($URL) "; read CHOICE && [[ $CHOICE = [yY] ]] || (echo "Cancelled"; exit 1)
-  { curl -fsSL "$URL" | bash --login -s -- ${@:2}; } || 
-  echo "Not found: '$1'"
+  echo "🌐 Find online? (y/n)"; read CHOICE && [[ $CHOICE = [yY] ]] || (echo "Cancelled"; exit 1)
+  { curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/online/$1.sh | bash --login -s -- ${@:2}; } && exit 1 || echo "Not found: '$1'"
 }
 
 [ "$#" -gt 0 ] || echo -e "Usage: $0 task [options]" && { "$@" || online "$@"; } # 🟢 DO IT!
