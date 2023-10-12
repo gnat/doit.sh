@@ -56,9 +56,7 @@ Do task: `./doit.sh build`
 ```bash
 help() { # Show help message.
   echo -e "Usage: $0 task [options]\nTasks:"
-  found=$(compgen -A function | grep -E '^_' -v)
-  found+=" "$(compgen -A function | grep -E '^_')
-  for func in $found; do printf "\t$func \t \e[92m $(grep -A1 "^$func()" $0 | grep -oP '(?<=# ).*')" ; printf " \e[0m \n"; done | column -t -s $'\t'
+  for func in $(compgen -A function | grep -E '^_' -v); do printf "\t$func \t \e[92m $(grep -A1 "^$func()" $0 | grep -oP '(?<=# ).*')" ; printf " \e[0m \n"; done | column -t -s $'\t'
 }
 
 [ "$#" -gt 0 ] && { "$@"; } || help;  # 🟢 DO IT!
