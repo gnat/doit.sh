@@ -38,7 +38,7 @@ all() {
 ```
 Save as `doit.sh` use `chmod +x ./doit.sh`
 
-Do a task: `./doit.sh build`
+Do task: `./doit.sh build`
 
 ## Alias setup
 * `echo "alias doit='./doit.sh'" >> ~/.bashrc`
@@ -47,9 +47,21 @@ Do a task: `./doit.sh build`
 
 ## Snippets
 
-### Show task list
+### Show help
 ```bash
 [ "$#" -gt 0 ] && { "$@"; } || echo -e "Usage: $0 task [options]\nTasks:"; printf "\t%s\n" $(compgen -A function) # 🟢 DO IT!
+```
+
+### Show very fancy green help with comments
+```bash
+help() { # Show help message.
+  echo -e "Usage: $0 task [options]\nTasks:"
+  found=$(compgen -A function | grep -E '^_' -v)
+  found+=" "$(compgen -A function | grep -E '^_')
+  for func in $found; do printf "\t$func \t \e[92m $(grep -A1 "^$func()" $0 | grep -oP '(?<=# ).*')" ; printf " \e[0m \n"; done | column -t -s $'\t'
+}
+
+[ "$#" -gt 0 ] && { "$@"; } || help;  # 🟢 DO IT!
 ```
 
 ### Include local script
@@ -66,7 +78,7 @@ online() {
   { curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/online/$1.sh | bash --login -s -- ${@:2}; } && exit 1 || echo "Not found: '$1'"
 }
 
-[ "$#" -gt 0 ] || echo -e "Usage: $0 task [options]" && { "$@" || online "$@"; } # 🟢 DO IT!
+[ "$#" -gt 0 ] || echo -e "Usage: $0 command [options]" && { "$@" || online "$@"; } # 🟢 DO IT!
 ```
 
 ## Online Snippets
