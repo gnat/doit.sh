@@ -27,7 +27,6 @@ clean() { echo "I am ${FUNCNAME[0]}ing in just one line." ;}
 
 required() {
   which docker || { echo "Error: Docker is not installed"; exit 1 ;}
-  # $0 docker/install_check # Easily run an online script. See below.
 }
 
 all() {
@@ -70,6 +69,11 @@ help() { # Show help message.
 ### Online scripts
 Run script from URL, including public or private github repositories! 
 ```bash
+required() {
+  which docker || { echo "Error: Docker is not installed"; exit 1 ;}
+  $0 docker/install_check # Easily run an online script.
+}
+
 online() {
   echo "🌐 Find online? (y/n)"; read CHOICE && [[ $CHOICE = [yY] ]] || (echo "Cancelled"; exit 1)
   { curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/extra/$1.sh | bash --login -s -- ${@:2}; } && exit 1 || echo "Not found: '$1'"
