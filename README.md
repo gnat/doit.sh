@@ -5,7 +5,6 @@
 * No installation
 * No dependencies
 * No overhead
-* Script locally, or online via curl
 
 Replace your convoluted build system with vanilla bash.
 
@@ -82,7 +81,7 @@ online() {
 [ "$#" -gt 0 ] || echo -e "Usage: $0 command [options]" && { "$@" || online "$@"; } # 🟢 DO IT!
 ```
 
-## Online Snippets
+## ✂️ Online Snippets
 
 ```bash
 # Run online script.
