@@ -52,7 +52,7 @@ Do task: `./doit.sh build`
 [ "$#" -gt 0 ] && { "$@"; } || echo -e "Usage: $0 task [options]\nTasks:"; printf "\t%s\n" $(compgen -A function) # 🟢 DO IT!
 ```
 
-### Show very fancy green help with comments
+### Show fancy help with comments
 ```bash
 help() { # Show help message.
   echo -e "Usage: $0 task [options]\nTasks:"
@@ -62,14 +62,13 @@ help() { # Show help message.
 [ "$#" -gt 0 ] && { "$@"; } || help;  # 🟢 DO IT!
 ```
 
-### Include local script
+### Local script include
 ```bash
-# Include local script.
 . $(dirname $0)/helpers.sh
 ```
 
 ### Online scripts
-Run any script from a URL, including public or private github repositories! 
+Run script from URL, including public or private github repositories! 
 ```bash
 online() {
   echo "🌐 Find online? (y/n)"; read CHOICE && [[ $CHOICE = [yY] ]] || (echo "Cancelled"; exit 1)
