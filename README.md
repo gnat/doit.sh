@@ -72,7 +72,7 @@ Run script from URL, including public or private github repositories!
 ```bash
 online() {
   echo "🌐 Find online? (y/n)"; read CHOICE && [[ $CHOICE = [yY] ]] || (echo "Cancelled"; exit 1)
-  { curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/online/$1.sh | bash --login -s -- ${@:2}; } && exit 1 || echo "Not found: '$1'"
+  { curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/extra/$1.sh | bash --login -s -- ${@:2}; } && exit 1 || echo "Not found: '$1'"
 }
 
 [ "$#" -gt 0 ] || echo -e "Usage: $0 command [options]" && { "$@" || online "$@"; } # 🟢 DO IT!
@@ -82,10 +82,10 @@ online() {
 
 ```bash
 # Run online script.
-curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/online/helpers.sh | bash
+curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/extra/helpers.sh | bash
 
 # Import online script.
-. <(curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/online/helpers.sh)
+. <(curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/extra/helpers.sh)
 ```
 
 ### Use private github
@@ -103,8 +103,8 @@ online() {
 online() {
   URLS=(
     "https://YOUR_PRIVATE_GITHUB/main/$1.sh -H 'Authorization: Token YOUR_PRIVATE_ACCESS_CODE'"
-    "https://raw.githubusercontent.com/gnat/doit/main/online/$1.sh"
-    "https://raw.githubusercontent.com/gnat/doit_again/main/online/$1.sh"
+    "https://raw.githubusercontent.com/gnat/doit/main/extra/$1.sh"
+    "https://raw.githubusercontent.com/gnat/doit_again/main/extra/$1.sh"
   )
   for URL in "${URLS[@]}"; do
     echo "🌐 Find online? (y/n) (${URL%% *}) "; read CHOICE && [[ $CHOICE = [yY] ]] || { echo "Skipping"; continue; }
@@ -127,7 +127,7 @@ online() {
 ## FAQ
 
 ### For online scripts, why are `read` prompts not working ?
-* `curl https://URL/script.sh | bash` breaks some user input prompts such as `read`. For workarounds, see [examples/choices](https://github.com/gnat/doit/blob/main/online/examples/choices.sh). If you do not want to use a different convention for calling online scripts, you may consider passing script arguments only.
+* `curl https://URL/script.sh | bash` breaks some user input prompts such as `read`. For workarounds, see [examples/choices](https://github.com/gnat/doit/blob/main/extra/examples/choices.sh). If you do not want to use a different convention for calling online scripts, you may consider passing script arguments only.
 
 ### For online scripts, why `bash --login` ?
 * This simulates a user session, and is required to install certain apps such as Rootless Docker.
