@@ -9,7 +9,7 @@
 
 Replace your convoluted build system with vanilla bash.
 
-## 👉 Show me
+## 👁️ What does it look like?
 
 ```bash
 #!/bin/bash
@@ -39,12 +39,12 @@ Save as `doit.sh` use `chmod +x ./doit.sh`
 
 Do task: `./doit.sh build`
 
-## Alias setup
+## ♻️ Alias setup
 * `echo "alias doit='./doit.sh'" >> ~/.bashrc`
 * Open new shell.
 * You can now use `doit`
 
-## Snippets
+## ✂️ Snippets
 
 ### Show help
 ```bash
@@ -118,7 +118,7 @@ online() {
 }
 ```
 
-## Helpful references
+## 📚 Helpful references
 
 * [Bash Manual](https://www.gnu.org/software/bash/manual/html_node/index.html)
 * [Bash Source Code](https://github.com/bminor/bash)
@@ -128,7 +128,7 @@ online() {
 * [Why "pipefail"?](https://mobile.twitter.com/b0rk/status/1314345978963648524)
 * [CURL guide](https://github.com/frizb/HackingWithCurl)
 
-## FAQ
+## 🔍 Technical FAQ
 
 ### For online scripts, why are `read` prompts not working ?
 * `curl https://URL/script.sh | bash` breaks some user input prompts such as `read`. For workarounds, see [examples/choices](https://github.com/gnat/doit/blob/main/extra/examples/choices.sh). If you do not want to use a different convention for calling online scripts, you may consider passing script arguments only.
@@ -136,11 +136,11 @@ online() {
 ### For online scripts, why `bash --login` ?
 * This simulates a user session, and is required to install certain apps such as Rootless Docker.
 
-## Special thanks
+## ✨ Special thanks
 * Forked from [do](https://github.com/8gears/do) and [run](https://github.com/icetbr/run)
 * Inspired by [shell](https://github.com/netkiller/shell)
 
-## Related tools
+## 👀 Related tools
 
 * [Task](http://taskfile.org/#/usage) a task runner / simpler Make alternative written in Go
 * [Robo](https://github.com/tj/robo) Simple Go / YAML-based task runner for the team.
