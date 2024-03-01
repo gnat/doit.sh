@@ -13,7 +13,6 @@ clean() { echo "I am ${FUNCNAME[0]}ing in just one line." ;}
 
 required() {
   which docker || { echo "Error: Docker is not installed"; exit 1 ;}
-  # $0 docker/install_check # Easily run an online script. See below.
 }
 
 all() {
