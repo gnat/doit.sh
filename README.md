@@ -15,11 +15,11 @@ Replace your convoluted build system with vanilla bash.
 set -euo pipefail # Error handling: -e stops on errors. -u stops on unset variables. -o pipefail stops pipelines on fail: https://mobile.twitter.com/b0rk/status/1314345978963648524
 
 build() {
-  echo "I am ${FUNCNAME[0]}ing" # ▶️ doit build 👁️ I am building
+  echo "I am ${FUNCNAME[0]}ing" # doit build ... I am building
 }
 
 deploy() {
-  echo "I am ${FUNCNAME[0]}ing with args $1 $2 $3" # ▶️ doit deploy a b c 👁️ I am deploying with args a b c
+  echo "I am ${FUNCNAME[0]}ing with args $1 $2 $3" # doit deploy a b c ... I am deploying with args a b c
 }
 
 clean() { echo "I am ${FUNCNAME[0]}ing in just one line." ;}
@@ -32,7 +32,7 @@ all() {
   required && clean && build && deploy a b c # Continues chain on success.
 }
 
-[ "$#" -gt 0 ] || echo "Usage: doit task [options]" && "$@" # 🟢 DO IT!
+[ "$#" -gt 0 ] || echo "Use: doit task [options]" && "$@" # 🟢 DO IT!
 ```
 Save as `doit.sh` use `chmod +x ./doit.sh`
 
@@ -45,30 +45,27 @@ Do task: `./doit.sh build`
 
 ## ✂️ Snippets
 
-### Show help
+#### Help
 ```bash
-[ "$#" -gt 0 ] && { "$@"; } || echo -e "Usage: $0 task [options]\nTasks:"; printf "\t%s\n" $(compgen -A function) # 🟢 DO IT!
+[ "$#" -gt 0 ] && { "$@"; } || echo -e "Use: $0 task [options]\nTasks:"; printf "\t%s\n" $(compgen -A function) # 🟢 DO IT!
 ```
 
-### Show fancy help with comments
+#### Help with fancypants comments
 ```bash
-help() { # Show help message.
-  echo -e "Usage: $0 task [options]\nTasks:"
-  for func in $(compgen -A function | grep -E '^_' -v); do printf "\t$func \t \e[92m $(grep "^$func()" $0 | grep -oP '(?<=# ).*')" ; printf " \e[0m \n"; done | column -t -s $'\t'
-}
+help() { echo -e "Use: $0 task [options]\nTasks:"; awk '/^[a-zA-Z_][a-zA-Z0-9_]*\(\)/ {print $1}' "$0" | sed 's/()//' | while read -r task; do printf "\t$task \t \e[92m $(grep "^$task()" "$0" | head -n1 | grep -oP '(?<=\x23 ).*[^\\n]') \e[0m \n"; done | column -t -s $'\t' ;} # 👁️ Show all tasks.
 
-[ "$#" -gt 0 ] && { "$@"; } || help;  # 🟢 DO IT!
+[ "$#" -gt 0 ] && { "$@"; } || help  # 🟢 DO IT!
 ```
 
-### Local script include
+#### Local script include
 ```bash
 . $(dirname $0)/helpers.sh
 ```
 
-### Online scripts
+#### Online scripts
 Run script from URL, including public or private github repositories! 
 ```bash
-required() {
+required() { # Check dependencies.
   which docker || { echo "Error: Docker is not installed"; exit 1 ;}
   $0 docker/install_check # Easily run an online script.
 }
@@ -78,7 +75,7 @@ online() {
   { curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/extra/$1.sh | bash --login -s -- ${@:2}; } && exit 1 || echo "Not found: '$1'"
 }
 
-[ "$#" -gt 0 ] || echo -e "Usage: $0 command [options]" && { "$@" || online "$@"; } # 🟢 DO IT!
+[ "$#" -gt 0 ] || echo -e "Use: $0 command [options]" && { "$@" || online "$@"; } # 🟢 DO IT!
 ```
 
 ## ✂️ Online Snippets
@@ -91,7 +88,7 @@ curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/extra/helpers.sh | b
 . <(curl -fsSL https://raw.githubusercontent.com/gnat/doit/main/extra/helpers.sh)
 ```
 
-### Use private github
+#### Use private github
 ```bash
 online() {
   URL="https://YOUR_PRIVATE_GITHUB/main/$1.sh"
@@ -101,7 +98,7 @@ online() {
 }
 ```
 
-### Use private github, with fallbacks
+#### Use private github, with fallbacks
 ```bash
 online() {
   URLS=(
@@ -129,10 +126,10 @@ online() {
 
 ## 🔍 Technical FAQ
 
-### For online scripts, why are `read` prompts not working ?
+#### For online scripts, why are `read` prompts not working ?
 * `curl https://URL/script.sh | bash` breaks some user input prompts such as `read`. For workarounds, see [examples/choices](https://github.com/gnat/doit/blob/main/extra/examples/choices.sh). If you do not want to use a different convention for calling online scripts, you may consider passing script arguments only.
 
-### For online scripts, why `bash --login` ?
+#### For online scripts, why `bash --login` ?
 * This simulates a user session, and is required to install certain apps such as Rootless Docker.
 
 ## ✨ Special thanks
